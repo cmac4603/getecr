@@ -14,7 +14,6 @@ async fn main() {
         .author("Colin MacRae <me@cmac4603.dev>")
         .about("Fetches a single AWS ECR image & corresponding sha.")
         .setting(AppSettings::ArgRequiredElseHelp)
-        .setting(AppSettings::ColorAuto)
         .setting(AppSettings::ColoredHelp)
         .arg(Arg::with_name("repo")
             .required(true)
@@ -26,7 +25,7 @@ async fn main() {
             .help("Image tag to search for"))
         .get_matches();
 
-    let image_output = utils::get_tag(
+    let image_output: utils::writer::CliOutput = utils::get_tag(
         matches.value_of("repo").unwrap(),
         matches.value_of("tag").unwrap()
     ).await;

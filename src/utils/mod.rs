@@ -9,7 +9,7 @@ use rusoto_ecr::{BatchGetImageRequest, Ecr, EcrClient, ImageIdentifier};
 pub mod writer;
 
 
-pub async fn get_tag(repo: &str, tag: &str) -> Result<String, String> {
+pub async fn get_tag(repo: &str, tag: &str) -> writer::CliOutput {
     let client = EcrClient::new(Region::UsEast1);
 
     let registry_id = if env::var("ECR_REGISTRY_ID").is_ok() {
@@ -26,10 +26,10 @@ pub async fn get_tag(repo: &str, tag: &str) -> Result<String, String> {
     repository_name: repository_name,
     };
 
-    let output: Result<String, String> = match client.batch_get_image(get_img_input).await {
+    match client.batch_get_image(get_img_input).await {
         Ok(output) => match output.images {
             Some(images) => {
-                let mut image_output = Err("No image tags found.".to_string());
+                let mut image_output = Err(format!("Image tag {} not found", tag));
                 if images.len() > 1 {
                     image_output = Err("Multiple tags found?".into());
                 } else {
@@ -48,8 +48,6 @@ pub async fn get_tag(repo: &str, tag: &str) -> Result<String, String> {
             None => return Err("No image tags".into()),
         },
         Err(error) => return Err(error.to_string()),
-  };
-
-  output
+  }
 
 }

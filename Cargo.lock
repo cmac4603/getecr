@@ -406,7 +406,7 @@ dependencies = [
 
 [[package]]
 name = "getecr"
-version = "0.1.0"
+version = "1.0.1"
 dependencies = [
  "ansi_term 0.12.1",
  "clap",

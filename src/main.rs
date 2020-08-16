@@ -10,7 +10,7 @@ mod utils;
 #[tokio::main]
 async fn main() {
     let matches = App::new("GetECR")
-        .version("1.0.0")
+        .version("1.0.1")
         .author("Colin MacRae <me@cmac4603.dev>")
         .about("Fetches a single AWS ECR image & corresponding sha.")
         .setting(AppSettings::ArgRequiredElseHelp)

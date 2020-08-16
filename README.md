@@ -1,5 +1,12 @@
 # GetECR CLI
 
+## See releases for binaries
+
+## Install with cargo
+```bash
+cargo install --git https://${GITHUB_TOKEN}:x-oauth-basic@github.com/cmac4603/getecr getecr
+```
+
 ## Environment Variables
 - `ECR_IMAGE_PREFIX` (if your images are collected with a common prefix, optionally add this env var)
 - `ECR_REGISTRY_ID` (if not specified will use default from AWS)
